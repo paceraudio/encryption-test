@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TestEncryption</string>
+    <string name="encrypt">Encrypt</string>
+    <string name="decrypt">decrypt</string>
+    <string name="play_original">Play Original</string>
+    <string name="play_decrypted">Play Decrypted</string>
+    <string name="stop">Stop</string>
+    <string name="play_encrypted">Play Encrypted</string>
+</resources>
