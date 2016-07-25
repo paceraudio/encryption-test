@@ -6,4 +6,7 @@
     <string name="play_decrypted">Play Decrypted</string>
     <string name="stop">Stop</string>
     <string name="play_encrypted">Play Encrypted</string>
+    <string name="encrypt_to_db">ENCRYPT TO DB</string>
+    <string name="decrypt_from_db">DECRYPT FROM DB</string>
+    <string name="play_decrypted_from_db">PLAY DECRIPTED FROM DB</string>
 </resources>

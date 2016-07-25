@@ -14,4 +14,14 @@ public interface EncryptionActivityView {
     void onDirCreated(boolean exists);
 
     void onPlayEncrypted();
+
+    void onSongEncryptedToDb();
+
+    void onSongDecryptedFromDb();
+
+    void onPlayDecryptedFromDb();
+
+    void onMusicPlaying(String songPath);
+
+    void onMusicStopped();
 }

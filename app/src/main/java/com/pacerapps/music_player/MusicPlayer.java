@@ -27,10 +27,14 @@ public class MusicPlayer {
     public void playOriginal() {
         mediaPlayer = new MediaPlayer();
         try {
-            mediaPlayer.setDataSource(model.getOriginalSongPath());
-            mediaPlayer.prepare();
-            setUpErrorListener(mediaPlayer);
-            mediaPlayer.start();
+            String songPath = model.getOriginalSongPath();
+            if (songPath != null) {
+                mediaPlayer.setDataSource(model.getOriginalSongPath());
+                mediaPlayer.prepare();
+                setUpErrorListener(mediaPlayer);
+                mediaPlayer.start();
+            }
+
         } catch (IOException e) {
             Log.e(TAG, "playOriginal: ", e);
         }
@@ -39,10 +43,14 @@ public class MusicPlayer {
     public void playDecrypted() {
         mediaPlayer = new MediaPlayer();
         try {
-            mediaPlayer.setDataSource(model.getDecryptedSongPath());
-            mediaPlayer.prepare();
-            setUpErrorListener(mediaPlayer);
-            mediaPlayer.start();
+            String songPath = model.getDecryptedSongPath();
+            if (songPath != null) {
+                mediaPlayer.setDataSource(model.getDecryptedSongPath());
+                mediaPlayer.prepare();
+                setUpErrorListener(mediaPlayer);
+                mediaPlayer.start();
+            }
+
         } catch (IOException e) {
             Log.e(TAG, "playDecrypted: ", e);
         }
@@ -68,14 +76,32 @@ public class MusicPlayer {
     public void playEncrypted() {
         mediaPlayer = new MediaPlayer();
         try {
-            mediaPlayer.setDataSource(model
+            String songPath = model.getEncryptedSongPath();
+            if (songPath != null) {
+                mediaPlayer.setDataSource(model.getEncryptedSongPath());
+                mediaPlayer.prepare();
+                setUpErrorListener(mediaPlayer);
+                mediaPlayer.start();
+            }
 
-                    .getEncryptedSongPath());
-            mediaPlayer.prepare();
-            setUpErrorListener(mediaPlayer);
-            mediaPlayer.start();
         } catch (IOException e) {
             Log.e(TAG, "playEncrypted: ", e);
+        }
+    }
+
+    public void playDecryptedFromDb() {
+        mediaPlayer = new MediaPlayer();
+        try {
+            String songPath = model.getDecryptedFromDbSongPath();
+            if (songPath != null) {
+                mediaPlayer.setDataSource(model.getDecryptedFromDbSongPath());
+                mediaPlayer.prepare();
+                setUpErrorListener(mediaPlayer);
+                mediaPlayer.start();
+            }
+
+        } catch (IOException e) {
+            Log.e(TAG, "playDecryptedFromDb: ", e);
         }
     }
 }

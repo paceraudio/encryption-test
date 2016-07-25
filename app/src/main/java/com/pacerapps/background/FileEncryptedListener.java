@@ -8,4 +8,8 @@ public interface FileEncryptedListener {
     void onFileEncrypted();
 
     void onFileDecrypted();
+
+    void onSongEncryptedToDb();
+
+    void onFileDecryptedFromDb(String decryptedPath);
 }

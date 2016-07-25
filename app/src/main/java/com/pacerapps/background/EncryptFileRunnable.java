@@ -36,13 +36,7 @@ public class EncryptFileRunnable implements Runnable {
 
     @Override
     public void run() {
-        File songFile = EncryptionModel.checkFileExistsForMd5(originalPath);
-        if (songFile != null) {
-            EncryptionModel.calcMd5(songFile);
-            encryptFile();
-        } else {
-            Log.d(TAG, "run: song file is null!!!!!!!");
-        }
+        encryptFile();
     }
 
     private void encryptFile() {

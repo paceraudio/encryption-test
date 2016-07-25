@@ -47,6 +47,29 @@
         android:layout_alignStart="@+id/button_encrypt" />
 
     <Button
+        android:id="@+id/button_add_to_db"
+        android:text="@string/encrypt_to_db"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
+        android:typeface="monospace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_encrypt"
+        android:layout_alignStart="@+id/button_encrypt"
+        android:layout_marginTop="91dp" />
+
+    <Button
+        android:id="@+id/button_decrypt_from_db"
+        android:text="@string/decrypt_from_db"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
+        android:typeface="monospace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button_add_to_db"
+        android:layout_alignEnd="@+id/button_play_decrypt" />
+
+    <Button
         android:id="@+id/button_play_decrypt"
         android:text="@string/play_decrypted"
         android:textColor="@color/colorAccent"
@@ -69,6 +92,18 @@
         android:layout_centerHorizontal="true" />
 
     <Button
+        android:id="@+id/button_play_decrypted_from_db"
+        android:text="@string/play_decrypted_from_db"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
+        android:typeface="monospace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_play_encrypted"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp" />
+
+    <Button
         android:id="@+id/button_stop"
         android:text="@string/stop"
         android:layout_width="wrap_content"
@@ -79,5 +114,15 @@
         android:layout_marginBottom="76dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textview_status"
+        android:text="TEXT VIEW"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
+        android:typeface="monospace"/>
 
 </RelativeLayout>
