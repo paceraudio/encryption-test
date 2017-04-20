@@ -32,6 +32,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.exoplayer:exoplayer:r2.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
+    // Couchbase lite encrypted db
     compile 'com.couchbase.lite:couchbase-lite-android:+'
     compile 'com.couchbase.lite:couchbase-lite-android-sqlcipher:+'
+    // Dagger 2
+    compile 'com.google.dagger:dagger:2.9'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
 }

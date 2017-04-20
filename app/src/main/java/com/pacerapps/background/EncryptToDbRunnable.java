@@ -1,11 +1,9 @@
 package com.pacerapps.background;
 
-import android.util.Log;
+import com.pacerapps.EncApp;
+import com.pacerapps.repository.EncryptionRepository;
 
-import com.couchbase.lite.CouchbaseLiteException;
-import com.pacerapps.database.EncDbUtil;
-
-import java.io.IOException;
+import javax.inject.Inject;
 
 /**
  * Created by jeffwconaway on 7/25/16.
@@ -17,6 +15,9 @@ public class EncryptToDbRunnable implements Runnable {
     private String fileName;
     FileEncryptedListener listener;
 
+    @Inject
+    EncryptionRepository repository;
+
     private static final String TAG = "jwc";
 
     public EncryptToDbRunnable(String md5, String path, String fileName, FileEncryptedListener listener) {
@@ -24,16 +25,12 @@ public class EncryptToDbRunnable implements Runnable {
         this.path = path;
         this.fileName = fileName;
         this.listener = listener;
+        EncApp.getInstance().getAppComponent().inject(this);
     }
 
     @Override
     public void run() {
+        repository.createSongDocument(md5, path, fileName);
 
-        try {
-            EncDbUtil.createSongDocument(md5, path, fileName);
-            listener.onSongEncryptedToDb();
-        } catch (IOException | CouchbaseLiteException e) {
-            Log.e(TAG, "run: ", e);
-        }
     }
 }

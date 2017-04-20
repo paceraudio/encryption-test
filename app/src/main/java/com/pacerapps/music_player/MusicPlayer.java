@@ -1,7 +1,6 @@
 package com.pacerapps.music_player;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Log;
 
@@ -30,18 +29,16 @@ import com.pacerapps.testencryption.EncryptionModel;
  */
 public class MusicPlayer implements ExoPlayer.EventListener {
 
-    MediaPlayer mediaPlayer;
     EncryptionModel model;
     Context context;
 
     SimpleExoPlayer exoPlayer;
 
-    public static final String TAG = "jwc";
+    private static final String TAG = "jwc";
 
     public MusicPlayer(Context context, EncryptionModel model) {
         this.context = context.getApplicationContext();
         this.model = model;
-        //initExoPlayer();
     }
 
     // ExoPlayer listener methods

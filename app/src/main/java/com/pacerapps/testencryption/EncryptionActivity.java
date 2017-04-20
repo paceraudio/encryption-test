@@ -1,14 +1,15 @@
 package com.pacerapps.testencryption;
 
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.pacerapps.EncApp;
 
 public class EncryptionActivity extends AppCompatActivity implements View.OnClickListener, EncryptionActivityView {
 
@@ -43,6 +44,8 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         statusTextView = (TextView) findViewById(R.id.textview_status);
         presenter = new EncryptionActivityPresenter(getApplicationContext()
                 , this);
+
+        EncApp.getInstance().getAppComponent().inject(this);
     }
 
     @Override
