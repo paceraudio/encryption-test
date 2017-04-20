@@ -4,6 +4,16 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
 
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.pacerapps.testencryption.EncryptionModel;
 
 import java.io.IOException;
@@ -17,11 +27,26 @@ public class MusicPlayer {
     EncryptionModel model;
     Context context;
 
+    SimpleExoPlayer exoPlayer;
+
     public static final String TAG = "jwc";
 
     public MusicPlayer(Context context, EncryptionModel model) {
         this.context = context;
         this.model = model;
+        initExoPlayer();
+    }
+
+    private void initExoPlayer() {
+        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+        TrackSelection.Factory videoTrackSelectionFactory =
+                new AdaptiveTrackSelection.Factory(bandwidthMeter);
+        TrackSelector trackSelector =
+                new DefaultTrackSelector(videoTrackSelectionFactory);
+
+        LoadControl loadControl = new DefaultLoadControl();
+
+        exoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector, loadControl);
     }
 
     public void playOriginal() {
