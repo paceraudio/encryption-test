@@ -7,14 +7,15 @@ import com.pacerapps.music_player.MusicPlayer;
 /**
  * Created by jeffwconaway on 7/21/16.
  */
-public class EncryptionActivityPresenter {
+
+class EncryptionActivityPresenter {
 
     EncryptionActivityView view;
     EncryptionModel model;
     Context context;
     MusicPlayer musicPlayer;
 
-    public EncryptionActivityPresenter(Context context, EncryptionActivityView view) {
+    EncryptionActivityPresenter(Context context, EncryptionActivityView view) {
         this.view = view;
         this.context = context;
         model = new EncryptionModel(context, this);
@@ -23,88 +24,88 @@ public class EncryptionActivityPresenter {
 
 
 
-    public void makeDirectory() {
+    void makeDirectory() {
         boolean exists = model.makeDirectory();
         view.onDirCreated(exists);
     }
 
-    public String getSongDirectory() {
+    String getSongDirectory() {
         return model.getSongDirectory();
     }
 
-    public String getEncryptDirectory() {
+    String getEncryptDirectory() {
         return model.getEncryptedDirectory();
     }
 
-    public String getDecryptDirectory() {
+    String getDecryptDirectory() {
         return model.getDecryptedDirectory();
     }
 
-    public void encryptFile() {
+    void encryptFile() {
         model.encryptFile();
         //view.onEncrypt();
     }
 
-    public void decryptFile() {
+    void decryptFile() {
         model.decryptFile();
         //view.onDecrypt();
     }
 
-    public void playOriginal() {
-        musicPlayer.playOriginal();
+    void playOriginal() {
+        musicPlayer.playOriginalExo();
         view.onPlayOriginal();
         onMusicPlaying(model.getOriginalSongPath());
     }
 
-    public void playDecrypted() {
-        musicPlayer.playDecrypted();
+    void playDecrypted() {
+        musicPlayer.playDecryptedExo();
         view.onPlayDecrypted();
         onMusicPlaying(model.getDecryptedSongPath());
     }
 
-    public void stop() {
-        musicPlayer.stop();
+    void stop() {
+        musicPlayer.stopExo();
         view.onStopClicked();
         view.onMusicStopped();
     }
 
-    public void playEncrypted() {
-        musicPlayer.playEncrypted();
+    void playEncrypted() {
+        musicPlayer.playEncryptedExo();
         view.onPlayEncrypted();
         onMusicPlaying(model.getEncryptedSongPath());
     }
 
-    public void playDecryptedFromDb() {
-        musicPlayer.playDecryptedFromDb();
+    void playDecryptedFromDb() {
+        musicPlayer.playDecryptedFromDbExo();
         view.onPlayDecryptedFromDb();
         onMusicPlaying(model.getDecryptedFromDbSongPath());
     }
 
-    public void onMusicPlaying(String songPath) {
+    private void onMusicPlaying(String songPath) {
         view.onMusicPlaying(songPath);
     }
 
-    public void onFileEncrypted() {
+    void onFileEncrypted() {
         view.onEncrypt();
     }
 
-    public void onFileDecrypted() {
+    void onFileDecrypted() {
         view.onDecrypt();
     }
 
-    public void decryptFromDb() {
+    void decryptFromDb() {
         model.decryptFromDb();
     }
 
-    public void encryptToDb() {
+    void encryptToDb() {
         model.encryptToDb();
     }
 
-    public void onSongEncryptedToDb() {
+    void onSongEncryptedToDb() {
         view.onSongEncryptedToDb();
     }
 
-    public void onSongDecryptedFromDb() {
+    void onSongDecryptedFromDb() {
         view.onSongDecryptedFromDb();
     }
 
