@@ -203,7 +203,7 @@ public class EncryptionRepositoryImpl implements EncryptionRepository {
         fileOutputStream.flush();
         fileOutputStream.close();
         cipherInputStream.close();
-        //listener.onFileDecrypted();
+        listener.onFileDecrypted();
     }
 
     private void encrypt(String originalPath, String originalName, String encryptedDirectory, FileEncryptedListener listener) {
@@ -231,6 +231,6 @@ public class EncryptionRepositoryImpl implements EncryptionRepository {
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IOException e) {
             Log.e(TAG, "encryptFile: ", e);
         }
-        //listener.onFileEncrypted();
+        listener.onFileEncrypted();
     }
 }

@@ -34,6 +34,6 @@ public class DecryptFromDbRunnable implements Runnable {
     @Override
     public void run() {
         repository.retrieveSongAttachment(md5, decryptedFromDbPath, fileName);
-        //listener.onFileDecryptedFromDb(decryptedFromDbPath);
+        listener.onFileDecryptedFromDb(decryptedFromDbPath);
     }
 }

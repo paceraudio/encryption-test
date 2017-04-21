@@ -31,6 +31,6 @@ public class EncryptToDbRunnable implements Runnable {
     @Override
     public void run() {
         repository.createSongDocument(md5, path, fileName);
-
+        listener.onSongEncryptedToDb();
     }
 }
