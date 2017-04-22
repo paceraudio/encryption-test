@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.pacerapps.repository.EncryptionRepository;
 import com.pacerapps.repository.EncryptionRepositoryImpl;
+import com.pacerapps.repository.database.CouchBaseLiteDbHelper;
+import com.pacerapps.testencryption.EncryptionActivityPresenter;
+import com.pacerapps.testencryption.EncryptionModelImpl;
 
 import javax.inject.Singleton;
 
@@ -28,8 +31,23 @@ public class AppModule {
         return context;
     }
 
+    @Provides
+    public EncryptionActivityPresenter providePresenter(Context context, EncryptionModelImpl model) {
+        return new EncryptionActivityPresenter(context, model);
+    }
+
     @Singleton @Provides
-    public EncryptionRepository provideEncryptionRepository() {
-        return new EncryptionRepositoryImpl();
+    public EncryptionModelImpl provideModel(EncryptionRepository repository) {
+        return new EncryptionModelImpl(repository);
+    }
+
+    @Singleton @Provides
+    public EncryptionRepository provideEncryptionRepository(Context context, CouchBaseLiteDbHelper couchBaseLiteDbHelper) {
+        return new EncryptionRepositoryImpl(context, couchBaseLiteDbHelper);
+    }
+
+    @Singleton @Provides
+    public CouchBaseLiteDbHelper provideCouchBaseLiteDb(Context context) {
+        return new CouchBaseLiteDbHelper(context);
     }
 }

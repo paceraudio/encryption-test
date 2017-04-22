@@ -22,21 +22,21 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.pacerapps.testencryption.EncryptionModel;
+import com.pacerapps.testencryption.EncryptionModelImpl;
 
 /**
  * Created by jeffwconaway on 7/21/16.
  */
 public class MusicPlayer implements ExoPlayer.EventListener {
 
-    EncryptionModel model;
+    EncryptionModelImpl model;
     Context context;
 
     SimpleExoPlayer exoPlayer;
 
     private static final String TAG = "jwc";
 
-    public MusicPlayer(Context context, EncryptionModel model) {
+    public MusicPlayer(Context context, EncryptionModelImpl model) {
         this.context = context.getApplicationContext();
         this.model = model;
     }

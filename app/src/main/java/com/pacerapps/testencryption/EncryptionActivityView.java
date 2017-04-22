@@ -6,6 +6,8 @@ package com.pacerapps.testencryption;
 
 interface EncryptionActivityView {
 
+    void setPresenter(EncryptionActivityPresenter presenter);
+
     void onEncrypt();
 
     void onDecrypt();
@@ -29,4 +31,8 @@ interface EncryptionActivityView {
     void onMusicPlaying(String songPath);
 
     void onMusicStopped();
+
+    void onError(Exception e);
+
+    void onFileWritingFromRaw();
 }

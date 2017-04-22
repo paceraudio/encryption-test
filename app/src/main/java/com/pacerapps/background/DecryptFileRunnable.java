@@ -1,9 +1,6 @@
 package com.pacerapps.background;
 
-import com.pacerapps.EncApp;
-import com.pacerapps.repository.EncryptionRepository;
-
-import javax.inject.Inject;
+import com.pacerapps.repository.filesystem.FileSystemUtil;
 
 /**
  * Created by jeffwconaway on 7/21/16.
@@ -13,22 +10,20 @@ public class DecryptFileRunnable implements Runnable {
     String encryptedDir;
     String decryptedDir;
     String originalName;
-    FileEncryptedListener listener;
-    @Inject
-    EncryptionRepository repository;
+    EncryptionModel model;
+
     public static final String TAG = "jwc";
 
-    public DecryptFileRunnable(String encryptedDir, String decryptedDir, String originalName, FileEncryptedListener listener) {
+    public DecryptFileRunnable(String encryptedDir, String decryptedDir, String originalName, EncryptionModel model) {
         this.encryptedDir = encryptedDir;
         this.decryptedDir = decryptedDir;
         this.originalName = originalName;
-        this.listener = listener;
-        EncApp.getInstance().getAppComponent().inject(this);
+        this.model = model;
     }
 
     @Override
     public void run() {
-        repository.decryptFile(encryptedDir, decryptedDir, originalName, listener);
+        new FileSystemUtil().decryptToFileSystem(encryptedDir, decryptedDir, originalName, model);
     }
 
 }

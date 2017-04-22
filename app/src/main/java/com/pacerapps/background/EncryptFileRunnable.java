@@ -2,6 +2,7 @@ package com.pacerapps.background;
 
 import com.pacerapps.EncApp;
 import com.pacerapps.repository.EncryptionRepository;
+import com.pacerapps.repository.filesystem.FileSystemUtil;
 
 import javax.inject.Inject;
 
@@ -12,14 +13,14 @@ public class EncryptFileRunnable implements Runnable {
     String originalPath;
     String encryptedDirectory;
     String originalName;
-    FileEncryptedListener listener;
+    EncryptionModel listener;
 
     @Inject
     EncryptionRepository repository;
 
     public static final String TAG = "jwc";
 
-    public EncryptFileRunnable(String originalPath, String originalName, String encryptedDirectory, FileEncryptedListener listener) {
+    public EncryptFileRunnable(String originalPath, String originalName, String encryptedDirectory, EncryptionModel listener) {
         this.originalPath = originalPath;
         this.originalName = originalName;
         this.encryptedDirectory = encryptedDirectory;
@@ -29,7 +30,7 @@ public class EncryptFileRunnable implements Runnable {
 
     @Override
     public void run() {
-        repository.encryptFile(originalPath, originalName, encryptedDirectory, listener);
+        new FileSystemUtil().encryptToFileSystem(originalPath, originalName, encryptedDirectory, listener);
     }
 
 }

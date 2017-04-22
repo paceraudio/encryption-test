@@ -13,14 +13,14 @@ public class EncryptToDbRunnable implements Runnable {
     private String md5;
     private String path;
     private String fileName;
-    FileEncryptedListener listener;
+    EncryptionModel listener;
 
     @Inject
     EncryptionRepository repository;
 
     private static final String TAG = "jwc";
 
-    public EncryptToDbRunnable(String md5, String path, String fileName, FileEncryptedListener listener) {
+    public EncryptToDbRunnable(String md5, String path, String fileName, EncryptionModel listener) {
         this.md5 = md5;
         this.path = path;
         this.fileName = fileName;

@@ -4,29 +4,37 @@ import android.content.Context;
 
 import com.pacerapps.music_player.MusicPlayer;
 
+import javax.inject.Inject;
+
 /**
  * Created by jeffwconaway on 7/21/16.
  */
 
-class EncryptionActivityPresenter {
+public class EncryptionActivityPresenter {
 
     EncryptionActivityView view;
-    EncryptionModel model;
+    @Inject
+    EncryptionModelImpl model;
+    @Inject
     Context context;
+
     MusicPlayer musicPlayer;
 
-    EncryptionActivityPresenter(Context context, EncryptionActivityView view) {
-        this.view = view;
+
+    public EncryptionActivityPresenter(Context context, EncryptionModelImpl model) {
         this.context = context;
-        model = new EncryptionModel(context, this);
+        this.model = model;
+        this.model.setPresenter(this);
         musicPlayer = new MusicPlayer(context, model);
     }
 
-
+    public void setView(EncryptionActivityView view) {
+        this.view = view;
+    }
 
     void makeDirectory() {
-        boolean exists = model.makeDirectory();
-        view.onDirCreated(exists);
+        model.makeDirectories();
+        //view.onDirCreated(exists);
     }
 
     String getSongDirectory() {
@@ -110,4 +118,11 @@ class EncryptionActivityPresenter {
     }
 
 
+    public void onError(Exception e) {
+        view.onError(e);
+    }
+
+    public void onFileWritingFromRaw() {
+        view.onFileWritingFromRaw();
+    }
 }

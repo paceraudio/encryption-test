@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.pacerapps.EncApp;
 
+import javax.inject.Inject;
+
 public class EncryptionActivity extends AppCompatActivity implements View.OnClickListener, EncryptionActivityView {
 
     Button encryptButton;
@@ -24,6 +26,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     Button stopButton;
     TextView statusTextView;
 
+    @Inject
     EncryptionActivityPresenter presenter;
 
     public static final String TAG = "jwc";
@@ -32,6 +35,24 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encryption);
+        defineWidgets();
+        setClickListeners();
+        EncApp.getInstance().getAppComponent().inject(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.setView(this);
+        presenter.makeDirectory();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    private void defineWidgets() {
         encryptButton = (Button) findViewById(R.id.button_encrypt);
         decryptButton = (Button) findViewById(R.id.button_decrypt);
         encryptToDbButton = (Button) findViewById(R.id.button_add_to_db);
@@ -42,16 +63,9 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         playDecryptedFromDbButton = (Button) findViewById(R.id.button_play_decrypted_from_db);
         stopButton = (Button) findViewById(R.id.button_stop);
         statusTextView = (TextView) findViewById(R.id.textview_status);
-        presenter = new EncryptionActivityPresenter(getApplicationContext()
-                , this);
-
-        EncApp.getInstance().getAppComponent().inject(this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.makeDirectory();
+    private void setClickListeners() {
         encryptButton.setOnClickListener(this);
         decryptButton.setOnClickListener(this);
         encryptToDbButton.setOnClickListener(this);
@@ -61,11 +75,6 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         playEncryptedButton.setOnClickListener(this);
         playDecryptedFromDbButton.setOnClickListener(this);
         stopButton.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override
@@ -103,6 +112,16 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
+    }
+
+    @Override
+    public void setPresenter(EncryptionActivityPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void onFileWritingFromRaw() {
+        makeTheToast("Copying song to file system");
     }
 
     @Override
@@ -180,12 +199,23 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    public void onError(Exception e) {
+        makeTheToast(e.getClass().getSimpleName() + " occurred!");
+    }
+
+    @Override
     public void onStopClicked() {
         Log.d(TAG, "onStopClicked: running!");
     }
 
     @Override
     public void onDirCreated(boolean exists) {
+        if (exists) {
+
+            makeTheToast("Directories created!");
+        } else {
+            makeTheToast("Problem creating directories!");
+        }
         /*Toast toast = Toast.makeText(this, "Directory created!!! " + presenter.getSongDirectory(), Toast.LENGTH_LONG);
         if (!exists) {
             toast.setText("Creating directory failed!");
