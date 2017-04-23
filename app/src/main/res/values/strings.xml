@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">TestEncryption</string>
-    <string name="encrypt">Encrypt</string>
-    <string name="decrypt">decrypt</string>
-    <string name="play_original">Play Original</string>
-    <string name="play_decrypted">Play Decrypted</string>
-    <string name="stop">Stop</string>
-    <string name="play_encrypted">Play Encrypted</string>
+    <string name="encrypt">ENCRYPT TO FILE</string>
+    <string name="decrypt">DECRYPT FROM FILE</string>
+    <string name="play_original">PLAY FROM ORIGINAL FILE</string>
+    <string name="play_decrypted">PLAY FROM DECRYPTED FILE</string>
+    <string name="stop">STOP</string>
+    <string name="play_encrypted">PLAY FROM ENCRYPTED FILE</string>
     <string name="encrypt_to_db">ENCRYPT TO DB</string>
     <string name="decrypt_from_db">DECRYPT FROM DB</string>
-    <string name="play_decrypted_from_db">PLAY DECRIPTED FROM DB</string>
+    <string name="play_decrypted_from_db">PLAY DECRYPTED FROM DB</string>
 </resources>

@@ -125,4 +125,8 @@ public class EncryptionActivityPresenter {
     public void onFileWritingFromRaw() {
         view.onFileWritingFromRaw();
     }
+
+    public void onExoEnd() {
+        view.onMusicStopped();
+    }
 }

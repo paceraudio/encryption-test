@@ -35,4 +35,6 @@ interface EncryptionActivityView {
     void onError(Exception e);
 
     void onFileWritingFromRaw();
+
+
 }

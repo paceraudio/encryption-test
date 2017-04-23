@@ -3,11 +3,9 @@ package com.pacerapps.testencryption;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pacerapps.EncApp;
 
@@ -61,7 +59,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         playDeryptedButton = (Button) findViewById(R.id.button_play_decrypt);
         playEncryptedButton = (Button) findViewById(R.id.button_play_encrypted);
         playDecryptedFromDbButton = (Button) findViewById(R.id.button_play_decrypted_from_db);
-        stopButton = (Button) findViewById(R.id.button_stop);
+        //stopButton = (Button) findViewById(R.id.button_stop);
         statusTextView = (TextView) findViewById(R.id.textview_status);
     }
 
@@ -74,7 +72,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         playDeryptedButton.setOnClickListener(this);
         playEncryptedButton.setOnClickListener(this);
         playDecryptedFromDbButton.setOnClickListener(this);
-        stopButton.setOnClickListener(this);
+        //stopButton.setOnClickListener(this);
     }
 
     @Override
@@ -89,8 +87,6 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
             presenter.playOriginal();
         } else if (v == playDeryptedButton) {
             presenter.playDecrypted();
-        } else if (v == stopButton) {
-            presenter.stop();
         } else if (v == playEncryptedButton) {
             presenter.playEncrypted();
         } else if (v == encryptToDbButton) {
@@ -99,16 +95,20 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
             presenter.decryptFromDb();
         } else if (v == playDecryptedFromDbButton) {
             presenter.playDecryptedFromDb();
-        }
+        }/*else if (v == stopButton) {
+            presenter.stop();
+        }*/
     }
 
     private void makeTheToast(final String message) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+                /*Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
-                toast.show();
+                toast.show();*/
+
+                statusTextView.setText(message);
             }
         });
 
@@ -159,12 +159,12 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onSongEncryptedToDb() {
-        makeTheToast("Song Encrypted To DB");
+        makeTheToast("File Encrypted To DB");
     }
 
     @Override
     public void onSongDecryptedFromDb() {
-        makeTheToast("Song Decrypted From DB");
+        makeTheToast("File Decrypted From DB");
     }
 
     @Override

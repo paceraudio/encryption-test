@@ -128,7 +128,10 @@ public class EncryptionModelImpl implements com.pacerapps.background.EncryptionM
 
     }
 
-
+    @Override
+    public void onExoEnd() {
+        presenter.onExoEnd();
+    }
 
     @Override
     public void onFileWritingFromRaw(File file) {

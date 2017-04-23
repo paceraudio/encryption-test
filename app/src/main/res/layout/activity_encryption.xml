@@ -10,41 +10,32 @@
     android:background="@color/colorPrimaryDark"
     tools:context="com.pacerapps.testencryption.EncryptionActivity">
 
+
     <Button
         android:id="@+id/button_encrypt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/encrypt"
         android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:layout_marginStart="36dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="20sp"
+        android:layout_margin="@dimen/button_padding"/>
 
     <Button
         android:id="@+id/button_decrypt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_encrypt"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/decrypt"
         android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="34dp"
-        android:layout_alignTop="@+id/button_encrypt"
-        android:layout_alignParentEnd="true" />
+        android:textSize="20sp"
+        android:layout_margin="@dimen/button_padding"/>
 
-    <Button
-        android:id="@+id/button_play_source"
-        android:text="@string/play_original"
-        android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimaryDark"
-        android:typeface="monospace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/button_encrypt" />
 
     <Button
         android:id="@+id/button_add_to_db"
@@ -52,11 +43,12 @@
         android:textColor="@color/colorAccent"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button_encrypt"
-        android:layout_alignStart="@+id/button_encrypt"
-        android:layout_marginTop="91dp" />
+        android:layout_below="@id/button_decrypt"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/button_padding"/>
 
     <Button
         android:id="@+id/button_decrypt_from_db"
@@ -64,10 +56,25 @@
         android:textColor="@color/colorAccent"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button_add_to_db"
-        android:layout_alignEnd="@+id/button_play_decrypt" />
+        android:layout_below="@id/button_add_to_db"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/button_padding"/>
+
+    <Button
+        android:id="@+id/button_play_source"
+        android:text="@string/play_original"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorPrimaryDark"
+        android:typeface="monospace"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_decrypt_from_db"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/button_padding"/>
 
     <Button
         android:id="@+id/button_play_decrypt"
@@ -75,21 +82,25 @@
         android:textColor="@color/colorAccent"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/button_decrypt" />
+        android:layout_below="@id/button_play_source"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/button_padding"/>
 
     <Button
         android:id="@+id/button_play_encrypted"
         android:text="@string/play_encrypted"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/button_play_decrypt"
+        android:layout_margin="@dimen/button_padding"/>
 
     <Button
         android:id="@+id/button_play_decrypted_from_db"
@@ -97,23 +108,12 @@
         android:textColor="@color/colorAccent"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_play_encrypted"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
-
-    <Button
-        android:id="@+id/button_stop"
-        android:text="@string/stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:background="@color/colorPrimaryDark"
-        android:typeface="monospace"
-        android:layout_marginBottom="76dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_margin="@dimen/button_padding"/>
 
     <TextView
         android:id="@+id/textview_status"
@@ -123,6 +123,20 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:background="@color/colorPrimaryDark"
-        android:typeface="monospace"/>
+        android:typeface="monospace"
+        android:layout_margin="@dimen/button_padding"
+        android:layout_alignParentBottom="true"/>
+    <!--<Button
+        android:id="@+id/button_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/stop"
+        android:textColor="@color/colorAccent"
+        android:typeface="monospace"
+        android:layout_margin="@dimen/button_padding"
+        android:layout_below="@id/button_play_decrypted_from_db"/>-->
+
 
 </RelativeLayout>

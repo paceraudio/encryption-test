@@ -82,6 +82,7 @@ public class MusicPlayer implements ExoPlayer.EventListener, TransferListener<Da
                 break;
             case ExoPlayer.STATE_ENDED:
                 state = "STATE_ENDED";
+                model.onExoEnd();
                 break;
         }
         Log.d(TAG, "onPlayerStateChanged: playWhenReady: " + playWhenReady + " state: " + playbackState + " " + state);

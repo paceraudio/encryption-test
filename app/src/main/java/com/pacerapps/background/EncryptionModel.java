@@ -37,5 +37,7 @@ public interface EncryptionModel {
 
     void onFileWritingFromRaw(File file);
 
+    void onExoEnd();
+
     //void onSongResourceToFileSystem();
 }
