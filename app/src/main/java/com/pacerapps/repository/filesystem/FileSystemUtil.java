@@ -143,10 +143,8 @@ public class FileSystemUtil {
             File encryptedFile = new File(encryptedFilePath);
             encryptedFile.createNewFile();
             FileOutputStream fileOutputStream = new FileOutputStream(encryptedFile);
-            SecretKeySpec secretKeySpec = new SecretKeySpec("123456789QWERTYU".getBytes(), "AES");
-            IvParameterSpec ivSpec = new IvParameterSpec("0123459876543210".getBytes());
-            Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivSpec);
+
+            Cipher cipher = initCipher();
             CipherOutputStream cipherOutputStream = new CipherOutputStream(fileOutputStream, cipher);
 
             int i;
@@ -185,13 +183,11 @@ outputStream = new CipherOutputStream(output_stream, cipher);*/
             decryptedFile.createNewFile();
 
             FileInputStream fileInputStream = new FileInputStream(encryptedFile);
-
             FileOutputStream fileOutputStream = new FileOutputStream(decryptedFile);
-            SecretKeySpec secretKeySpec = new SecretKeySpec("123456789QWERTYU".getBytes(), "AES");
-            IvParameterSpec ivSpec = new IvParameterSpec("0123459876543210".getBytes());
-            Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
-            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivSpec);
+
+            Cipher cipher = initCipher();
             CipherInputStream cipherInputStream = new CipherInputStream(fileInputStream, cipher);
+
             int i;
             byte[] bytes = new byte[1024];
             while ((i = cipherInputStream.read(bytes)) != -1) {
@@ -206,5 +202,25 @@ outputStream = new CipherOutputStream(output_stream, cipher);*/
             Log.e(TAG, "decryptToFileSystem: ", e);
             model.onError(e);
         }
+    }
+
+    public Cipher initCipher() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException {
+        SecretKeySpec secretKeySpec = new SecretKeySpec("123456789QWERTYU".getBytes(), "AES");
+        IvParameterSpec ivSpec = new IvParameterSpec("0123459876543210".getBytes());
+        Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
+        cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivSpec);
+        return cipher;
+    }
+
+    public SecretKeySpec createSecretKeySpec() {
+        return new SecretKeySpec("123456789QWERTYU".getBytes(), "AES");
+    }
+
+    public IvParameterSpec createIvParameterSpec() {
+        return new IvParameterSpec("0123459876543210".getBytes());
+    }
+
+    public Cipher createCipher() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException {
+        return Cipher.getInstance("AES/CTR/NoPadding");
     }
 }
