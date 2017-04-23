@@ -92,7 +92,7 @@ public class EncryptionRepositoryImpl implements EncryptionRepository {
             }
             out.close();
             in.close();
-            model.onFileWritingFromRaw(toWrite);
+            model.onFileWrittenFromRaw(toWrite);
             //model.onSongResourceToFileSystem();
             //model.setOriginalSongPath(path);
 

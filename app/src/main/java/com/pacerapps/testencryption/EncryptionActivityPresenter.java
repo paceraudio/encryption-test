@@ -122,8 +122,8 @@ public class EncryptionActivityPresenter {
         view.onError(e);
     }
 
-    public void onFileWritingFromRaw() {
-        view.onFileWritingFromRaw();
+    public void onFileWrittenFromRaw() {
+        view.onFileWrittenFromRaw();
     }
 
     public void onExoEnd() {

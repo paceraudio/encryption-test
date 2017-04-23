@@ -134,13 +134,13 @@ public class EncryptionModelImpl implements com.pacerapps.background.EncryptionM
     }
 
     @Override
-    public void onFileWritingFromRaw(File file) {
-        Log.d(TAG, "onFileWritingFromRaw() called with: file = [" + file.getAbsolutePath() + "]");
+    public void onFileWrittenFromRaw(File file) {
+        Log.d(TAG, "onFileWrittenFromRaw() called with: file = [" + file.getAbsolutePath() + "]");
         this.originalFile = file;
         originalName = originalFile.getName();
         originalSongPath = originalFile.getAbsolutePath();
         originalSongMd5 = new Md5Util().calcMd5(originalFile);
-        presenter.onFileWritingFromRaw();
+        presenter.onFileWrittenFromRaw();
     }
 
     @Override

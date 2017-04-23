@@ -23,6 +23,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     Button playDecryptedFromDbButton;
     Button stopButton;
     TextView statusTextView;
+    int pink;
 
     @Inject
     EncryptionActivityPresenter presenter;
@@ -36,6 +37,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         defineWidgets();
         setClickListeners();
         EncApp.getInstance().getAppComponent().inject(this);
+        pink = getResources().getColor(R.color.colorAccent);
     }
 
     @Override
@@ -100,7 +102,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         }*/
     }
 
-    private void makeTheToast(final String message) {
+    private void showUser(final String message) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -120,51 +122,38 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     }
 
     @Override
-    public void onFileWritingFromRaw() {
-        makeTheToast("Copying song to file system");
+    public void onFileWrittenFromRaw() {
+        showUser("Song written to file system");
+        enableButton(encryptButton);
+        enableButton(encryptToDbButton);
+        enableButton(playOriginalButton);
     }
 
     @Override
     public void onEncrypt() {
         Log.d(TAG, "onEncrypt: running!");
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                makeEncryptionToast();
-            }
-        });
-
-    }
-
-    private void makeEncryptionToast() {
-        makeTheToast("File Encrypted");
+        showUser("Song File Encrypted");
+        enableButton(decryptButton);
+        enableButton(playEncryptedButton);
     }
 
     @Override
     public void onDecrypt() {
         Log.d(TAG, "onDecrypt: running!");
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                makeDecryptionToast();
-            }
-        });
-
-    }
-
-    private void makeDecryptionToast() {
-        makeTheToast("File Decrypted");
+        showUser("Song File Decrypted");
+        enableButton(playDeryptedButton);
     }
 
     @Override
     public void onSongEncryptedToDb() {
-        makeTheToast("File Encrypted To DB");
+        showUser("File Encrypted To DB");
+        enableButton(decryptFromDbButton);
     }
 
     @Override
     public void onSongDecryptedFromDb() {
-        makeTheToast("File Decrypted From DB");
+        showUser("File Decrypted From DB");
+        enableButton(playDecryptedFromDbButton);
     }
 
     @Override
@@ -190,17 +179,17 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onMusicPlaying(String songPath) {
         String nowPlaying = "PLAYING " + songPath;
-        statusTextView.setText(nowPlaying);
+        showUser(nowPlaying);
     }
 
     @Override
     public void onMusicStopped() {
-        statusTextView.setText("");
+        showUser("");
     }
 
     @Override
     public void onError(Exception e) {
-        makeTheToast(e.getClass().getSimpleName() + " occurred!");
+        showUser(e.getClass().getSimpleName() + " occurred!");
     }
 
     @Override
@@ -211,21 +200,24 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onDirCreated(boolean exists) {
         if (exists) {
-
-            makeTheToast("Directories created!");
+            showUser("Directories created!");
         } else {
-            makeTheToast("Problem creating directories!");
+            showUser("Problem creating directories!");
         }
-        /*Toast toast = Toast.makeText(this, "Directory created!!! " + presenter.getSongDirectory(), Toast.LENGTH_LONG);
-        if (!exists) {
-            toast.setText("Creating directory failed!");
-        }
-        toast.show();
-        return exists;*/
 
         Log.d(TAG, "onDirCreated: " + presenter.getSongDirectory());
         Log.d(TAG, "onDirCreated: " + presenter.getEncryptDirectory());
         Log.d(TAG, "onDirCreated: " + presenter.getDecryptDirectory());
+    }
+
+    private void enableButton(final Button button) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                button.setTextColor(pink);
+                button.setClickable(true);
+            }
+        });
 
     }
 }

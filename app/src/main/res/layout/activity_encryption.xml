@@ -18,10 +18,11 @@
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimaryDark"
         android:text="@string/encrypt"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent2"
         android:typeface="monospace"
         android:textSize="20sp"
-        android:layout_margin="@dimen/button_padding"/>
+        android:layout_margin="@dimen/button_padding"
+        android:clickable="false"/>
 
     <Button
         android:id="@+id/button_decrypt"
@@ -31,16 +32,17 @@
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimaryDark"
         android:text="@string/decrypt"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent2"
         android:typeface="monospace"
         android:textSize="20sp"
-        android:layout_margin="@dimen/button_padding"/>
+        android:layout_margin="@dimen/button_padding"
+        android:clickable="false"/>
 
 
     <Button
         android:id="@+id/button_add_to_db"
         android:text="@string/encrypt_to_db"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
         android:textSize="20sp"
@@ -48,12 +50,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button_decrypt"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/button_padding"/>
+        android:layout_margin="@dimen/button_padding"
+        android:clickable="false"/>
 
     <Button
         android:id="@+id/button_decrypt_from_db"
         android:text="@string/decrypt_from_db"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
         android:textSize="20sp"
@@ -61,12 +64,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button_add_to_db"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/button_padding"/>
+        android:layout_margin="@dimen/button_padding"
+        android:clickable="false"/>
 
     <Button
         android:id="@+id/button_play_source"
         android:text="@string/play_original"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
         android:textSize="20sp"
@@ -74,12 +78,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button_decrypt_from_db"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/button_padding"/>
+        android:layout_margin="@dimen/button_padding"
+        android:clickable="false"/>
 
     <Button
         android:id="@+id/button_play_decrypt"
         android:text="@string/play_decrypted"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
         android:textSize="20sp"
@@ -87,25 +92,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button_play_source"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/button_padding"/>
+        android:layout_margin="@dimen/button_padding"
+        android:clickable="false"/>
 
     <Button
         android:id="@+id/button_play_encrypted"
         android:text="@string/play_encrypted"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
         android:textSize="20sp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/button_play_decrypt"
-        android:layout_margin="@dimen/button_padding"/>
+        android:layout_margin="@dimen/button_padding"
+        android:clickable="false"/>
 
     <Button
         android:id="@+id/button_play_decrypted_from_db"
         android:text="@string/play_decrypted_from_db"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
         android:textSize="20sp"
@@ -113,7 +120,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_play_encrypted"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/button_padding"/>
+        android:layout_margin="@dimen/button_padding"
+        android:clickable="false"/>
 
     <TextView
         android:id="@+id/textview_status"

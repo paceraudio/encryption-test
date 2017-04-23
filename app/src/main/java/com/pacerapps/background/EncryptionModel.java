@@ -35,7 +35,7 @@ public interface EncryptionModel {
 
     void onOriginalMd5Calculated(String s);
 
-    void onFileWritingFromRaw(File file);
+    void onFileWrittenFromRaw(File file);
 
     void onExoEnd();
 
