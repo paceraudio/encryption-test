@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -17,6 +18,7 @@ import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.inject.Inject;
 
@@ -142,8 +144,9 @@ public class FileSystemUtil {
             encryptedFile.createNewFile();
             FileOutputStream fileOutputStream = new FileOutputStream(encryptedFile);
             SecretKeySpec secretKeySpec = new SecretKeySpec("123456789QWERTYU".getBytes(), "AES");
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+            IvParameterSpec ivSpec = new IvParameterSpec("0123459876543210".getBytes());
+            Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivSpec);
             CipherOutputStream cipherOutputStream = new CipherOutputStream(fileOutputStream, cipher);
 
             int i;
@@ -157,12 +160,20 @@ public class FileSystemUtil {
             fileInputStream.close();
 
             model.onEncryptedFileCreated(encryptedFile);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IOException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IOException | InvalidAlgorithmParameterException e) {
             Log.e(TAG, "encryptFile: ", e);
             model.onError(e);
         }
 
     }
+//Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
+
+    /*Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+SecretKeySpec keySpec = new SecretKeySpec("0123456789012345".getBytes(), "AES");
+IvParameterSpec ivSpec = new IvParameterSpec("0123459876543210".getBytes());
+cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
+
+outputStream = new CipherOutputStream(output_stream, cipher);*/
 
     public void decryptToFileSystem(String encryptedDir, String decryptedDir, String originalName, EncryptionModel model) {
 
@@ -176,10 +187,10 @@ public class FileSystemUtil {
             FileInputStream fileInputStream = new FileInputStream(encryptedFile);
 
             FileOutputStream fileOutputStream = new FileOutputStream(decryptedFile);
-            SecretKeySpec secretKeySpec = new SecretKeySpec("123456789QWERTYU".getBytes(),
-                    "AES");
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+            SecretKeySpec secretKeySpec = new SecretKeySpec("123456789QWERTYU".getBytes(), "AES");
+            IvParameterSpec ivSpec = new IvParameterSpec("0123459876543210".getBytes());
+            Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
+            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivSpec);
             CipherInputStream cipherInputStream = new CipherInputStream(fileInputStream, cipher);
             int i;
             byte[] bytes = new byte[1024];
@@ -191,7 +202,7 @@ public class FileSystemUtil {
             fileOutputStream.close();
             cipherInputStream.close();
             model.onFileDecrypted(decryptedFile);
-        } catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+        } catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
             Log.e(TAG, "decryptToFileSystem: ", e);
             model.onError(e);
         }

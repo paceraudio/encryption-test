@@ -46,7 +46,6 @@ public class CouchBaseLiteDbHelper {
 
     public CouchBaseLiteDbHelper(Context context) {
         this.context = context;
-        //EncApp.getInstance().getAppComponent().inject(this);
         try {
             initDatabase();
         } catch (IOException | CouchbaseLiteException e) {
