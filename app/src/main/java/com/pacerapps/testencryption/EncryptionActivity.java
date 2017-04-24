@@ -23,6 +23,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     Button playDecryptedFromDbButton;
     TextView statusTextView;
     int pink;
+    int green;
 
     @Inject
     EncryptionActivityPresenter presenter;
@@ -37,6 +38,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         setClickListeners();
         EncApp.getInstance().getAppComponent().inject(this);
         pink = getResources().getColor(R.color.colorAccent);
+        green = getResources().getColor(R.color.green);
     }
 
     @Override
@@ -114,36 +116,36 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onFileWrittenFromRaw() {
         showUser("Song written to file system");
-        enableButton(encryptButton);
-        enableButton(encryptToDbButton);
-        enableButton(playOriginalButton);
+        enableButton(encryptButton, false);
+        enableButton(encryptToDbButton, false);
+        enableButton(playOriginalButton, true);
     }
 
     @Override
     public void onEncrypt() {
         Log.d(TAG, "onEncrypt: running!");
         showUser("Song File Encrypted");
-        enableButton(decryptButton);
-        enableButton(playEncryptedButton);
+        enableButton(decryptButton, false);
+        enableButton(playEncryptedButton, true);
     }
 
     @Override
     public void onDecrypt() {
         Log.d(TAG, "onDecrypt: running!");
         showUser("Song File Decrypted");
-        enableButton(playDeryptedButton);
+        enableButton(playDeryptedButton, true);
     }
 
     @Override
     public void onSongEncryptedToDb() {
         showUser("File Encrypted To DB");
-        enableButton(decryptFromDbButton);
+        enableButton(decryptFromDbButton, false);
     }
 
     @Override
     public void onSongDecryptedFromDb() {
         showUser("File Decrypted From DB");
-        enableButton(playDecryptedFromDbButton);
+        enableButton(playDecryptedFromDbButton, true);
     }
 
     @Override
@@ -182,11 +184,15 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         showUser(e.getClass().getSimpleName() + " occurred!");
     }
 
-    private void enableButton(final Button button) {
+    private void enableButton(final Button button, final boolean play) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                button.setTextColor(pink);
+                if (play) {
+                    button.setTextColor(green);
+                } else {
+                    button.setTextColor(pink);
+                }
                 button.setClickable(true);
             }
         });
