@@ -47,10 +47,8 @@ public class EncryptionModelImpl implements com.pacerapps.background.EncryptionM
     private String decryptedFromDbMd5;
 
     public EncryptionModelImpl(EncryptionRepository repository) {
-        //EncApp.getInstance().getAppComponent().inject(this);
         this.repository = repository;
         this.repository.setModel(this);
-        //repository.initRepository();
     }
 
     public void setPresenter(EncryptionActivityPresenter presenter) {
@@ -62,41 +60,13 @@ public class EncryptionModelImpl implements com.pacerapps.background.EncryptionM
         return originalSongPath;
     }
 
-    public void setOriginalSongPath(String path) {
-        originalSongPath = path;
-    }
-
     public String getEncryptedSongPath() {
         return encryptedSongPath;
-    }
-
-    public void setEncryptedSongPath(String path) {
-        encryptedSongPath = path;
     }
 
     public String getDecryptedSongPath() {
         Log.d(TAG, "getDecryptedSongPath() returned: " + decryptedSongPath);
         return decryptedSongPath;
-    }
-
-    public void setDecryptedSongPath(String path) {
-        decryptedSongPath = path;
-    }
-
-    public void setOriginalSongMd5(String originalSongMd5) {
-        this.originalSongMd5 = originalSongMd5;
-    }
-
-    public String getOriginalSongMd5() {
-        return originalSongMd5;
-    }
-
-    public String getDecryptedSongMd5() {
-        return decryptedSongMd5;
-    }
-
-    public void setDecryptedSongMd5(String decryptedSongMd5) {
-        this.decryptedSongMd5 = decryptedSongMd5;
     }
 
     @Override
@@ -216,34 +186,31 @@ public class EncryptionModelImpl implements com.pacerapps.background.EncryptionM
 
 
 
-    public String getEncryptedDirectory() {
+    String getEncryptedDirectory() {
         Log.d(TAG, "getEncryptedDirectory: " + encryptedDirectory);
         return encryptedDirectory;
     }
 
-    public String getDecryptedDirectory() {
+    String getDecryptedDirectory() {
         Log.d(TAG, "getDecryptedDirectory: " + decryptedDirectory);
         return decryptedDirectory;
     }
 
-    public String getDecryptedFromDbDirectory() {
-        return decryptedFromDbDirectory;
-    }
-
-    public void encryptFile() {
+    void encryptFile() {
         repository.encryptFile(originalSongPath, originalName, encryptedDirectory, this);
     }
 
-    public void decryptFile() {
+    void decryptFile() {
         Log.d(TAG, "decryptFile: running!");
         repository.decryptFile(encryptedDirectory, decryptedDirectory, originalName, this);
     }
 
-    public void encryptToDb() {
+    void encryptToDb() {
         repository.encryptToDb(originalSongMd5, originalSongPath, originalName, this);
     }
 
-    public void decryptFromDb() {
+
+    void decryptFromDb() {
         String decryptedFromDbPath = decryptedFromDbDirectory + "/" + originalName;
         repository.decryptFromDb(originalSongMd5, decryptedFromDbPath, originalName, this);
 
@@ -256,7 +223,7 @@ public class EncryptionModelImpl implements com.pacerapps.background.EncryptionM
         return decryptedFromDbSongPath;
     }
 
-    public void makeDirectories() {
+    void makeDirectories() {
         repository.initRepository();
     }
 }

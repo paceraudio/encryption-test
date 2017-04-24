@@ -33,19 +33,6 @@ public class FileSystemUtil {
     @Inject
     Context context;
 
-    private String songDirectory = "";
-    private String encryptedDirectory = "";
-    private String decryptedDirectory = "";
-    private String decryptedFromDbDirectory = "";
-
-    File originalFile;
-    String originalName;
-    private String originalSongPath;
-    private String encryptedSongPath;
-    private String decryptedSongPath;
-    private String decryptedFromDbSongPath;
-    private String originalSongMd5;
-
     public FileSystemUtil() {
         EncApp.getInstance().getAppComponent().inject(this);
 
@@ -60,67 +47,29 @@ public class FileSystemUtil {
         File file = new File(path);
         boolean exists = (file.mkdirs() || file.isDirectory());
         if (exists) {
-            songDirectory = file.getAbsolutePath();
+            String songDirectory = file.getAbsolutePath();
             model.onSongDirCreated(songDirectory);
         }
         File encrypt = new File(encryptedDir);
         boolean encryptExists = (encrypt.mkdirs() || encrypt.isDirectory());
         if (encryptExists) {
-            encryptedDirectory = encrypt.getAbsolutePath();
+            String encryptedDirectory = encrypt.getAbsolutePath();
             model.onEncryptedDirCreated(encryptedDirectory);
         }
         File decrypted = new File(decryptedDir);
         boolean decryptedExists = (decrypted.mkdirs() || decrypted.isDirectory());
         if (decryptedExists) {
-            decryptedDirectory = decrypted.getAbsolutePath();
+            String decryptedDirectory = decrypted.getAbsolutePath();
             model.onDecryptedDirCreated(decryptedDirectory);
         }
         File decryptedDb = new File(decryptedFromDbDir);
         boolean decryptedFromDbExists = (decryptedDb.mkdirs() || decryptedDb.isDirectory());
         if (decryptedFromDbExists) {
-            decryptedFromDbDirectory = decryptedDb.getAbsolutePath();
+            String decryptedFromDbDirectory = decryptedDb.getAbsolutePath();
             model.onDecryptedFromDbDirCreated(decryptedFromDbDirectory);
         }
-        //listFiles(listener);
         Log.d(TAG, "makeDirectories() returned: " + (exists && encryptExists && decryptedExists && decryptedFromDbExists));
         return exists && encryptExists && decryptedExists && decryptedFromDbExists;
-    }
-
-    public void listFiles(EncryptionModel listener) {
-        File songDir = new File(songDirectory);
-        File[] files = songDir.listFiles();
-        for (File file : files) {
-            Log.d(TAG, "listFiles: " + file.getAbsolutePath());
-            originalFile = file;
-            listener.onOriginalFileCreated(originalFile);
-
-            // TODO: 4/21/17 add these in implementation in listener method
-            originalName = file.getName();
-            originalSongPath = file.getAbsolutePath();
-            originalSongMd5 = new Md5Util().calcMd5(file);
-        }
-        File encryptFile = new File(encryptedDirectory);
-        File[] encrptFiles = encryptFile.listFiles();
-        for (File file : encrptFiles) {
-            Log.d(TAG, "listFiles: encrypted: " + file.getAbsolutePath());
-            encryptedSongPath = file.getAbsolutePath();
-            listener.onEncryptedFileCreated(file);
-        }
-
-        File decryptedFile = new File(decryptedDirectory);
-        File[] decrptFiles = decryptedFile.listFiles();
-        for (File file : decrptFiles) {
-            Log.d(TAG, "listFiles: decrypted: " + file.getAbsolutePath());
-            decryptedSongPath = file.getAbsolutePath();
-            listener.onDecryptedFileCreated(file);
-        }
-
-        File decryptedFromDbFile = new File(decryptedFromDbDirectory);
-        File[] decryptDbFiles = decryptedFromDbFile.listFiles();
-        for (File file : decryptDbFiles) {
-            Log.d(TAG, "listFiles: decrypted from DB: " + file.getAbsolutePath());
-            listener.onDecryptedFromDbFileCreated(file);
-        }
     }
 
     public File checkFileExists(String filePath) {
@@ -151,7 +100,7 @@ public class FileSystemUtil {
             byte[] bytes = new byte[1024];
             while ((i = fileInputStream.read(bytes)) != -1) {
                 cipherOutputStream.write(bytes, 0, i);
-                Log.d(TAG, "encryptFile: " + i);
+                //Log.d(TAG, "encryptFile: " + i);
             }
             cipherOutputStream.flush();
             cipherOutputStream.close();
@@ -164,14 +113,6 @@ public class FileSystemUtil {
         }
 
     }
-//Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
-
-    /*Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-SecretKeySpec keySpec = new SecretKeySpec("0123456789012345".getBytes(), "AES");
-IvParameterSpec ivSpec = new IvParameterSpec("0123459876543210".getBytes());
-cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
-
-outputStream = new CipherOutputStream(output_stream, cipher);*/
 
     public void decryptToFileSystem(String encryptedDir, String decryptedDir, String originalName, EncryptionModel model) {
 
@@ -192,7 +133,7 @@ outputStream = new CipherOutputStream(output_stream, cipher);*/
             byte[] bytes = new byte[1024];
             while ((i = cipherInputStream.read(bytes)) != -1) {
                 fileOutputStream.write(bytes, 0, i);
-                Log.d(TAG, "encryptFile: " + i);
+                //Log.d(TAG, "encryptFile: " + i);
             }
             fileOutputStream.flush();
             fileOutputStream.close();
@@ -210,17 +151,5 @@ outputStream = new CipherOutputStream(output_stream, cipher);*/
         Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
         cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivSpec);
         return cipher;
-    }
-
-    public SecretKeySpec createSecretKeySpec() {
-        return new SecretKeySpec("123456789QWERTYU".getBytes(), "AES");
-    }
-
-    public IvParameterSpec createIvParameterSpec() {
-        return new IvParameterSpec("0123459876543210".getBytes());
-    }
-
-    public Cipher createCipher() throws InvalidAlgorithmParameterException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException {
-        return Cipher.getInstance("AES/CTR/NoPadding");
     }
 }

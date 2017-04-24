@@ -16,13 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/encrypt"
-        android:textColor="@color/colorAccent2"
-        android:typeface="monospace"
-        android:textSize="20sp"
         android:layout_margin="@dimen/button_padding"
-        android:clickable="false"/>
+        android:background="@color/colorPrimaryDark"
+        android:clickable="false"
+        android:text="@string/encrypt"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size"
+        android:typeface="normal" />
 
     <Button
         android:id="@+id/button_decrypt"
@@ -34,7 +34,7 @@
         android:text="@string/decrypt"
         android:textColor="@color/colorAccent2"
         android:typeface="monospace"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size"
         android:layout_margin="@dimen/button_padding"
         android:clickable="false"/>
 
@@ -45,7 +45,7 @@
         android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_decrypt"
@@ -59,7 +59,7 @@
         android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_add_to_db"
@@ -73,7 +73,7 @@
         android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_decrypt_from_db"
@@ -87,7 +87,7 @@
         android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_play_source"
@@ -97,17 +97,17 @@
 
     <Button
         android:id="@+id/button_play_encrypted"
-        android:text="@string/play_encrypted"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent2"
-        android:background="@color/colorPrimaryDark"
-        android:typeface="monospace"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/button_play_decrypt"
+        android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/button_padding"
-        android:clickable="false"/>
+        android:background="@color/colorPrimaryDark"
+        android:clickable="false"
+        android:text="@string/play_encrypted"
+        android:textColor="@color/colorAccent2"
+        android:textSize="@dimen/text_size"
+        android:typeface="monospace" />
 
     <Button
         android:id="@+id/button_play_decrypted_from_db"
@@ -115,7 +115,7 @@
         android:textColor="@color/colorAccent2"
         android:background="@color/colorPrimaryDark"
         android:typeface="monospace"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_play_encrypted"
@@ -134,17 +134,7 @@
         android:typeface="monospace"
         android:layout_margin="@dimen/button_padding"
         android:layout_alignParentBottom="true"/>
-    <!--<Button
-        android:id="@+id/button_stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/stop"
-        android:textColor="@color/colorAccent"
-        android:typeface="monospace"
-        android:layout_margin="@dimen/button_padding"
-        android:layout_below="@id/button_play_decrypted_from_db"/>-->
+
 
 
 </RelativeLayout>

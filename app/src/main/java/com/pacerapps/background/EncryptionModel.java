@@ -39,5 +39,4 @@ public interface EncryptionModel {
 
     void onExoEnd();
 
-    //void onSongResourceToFileSystem();
 }

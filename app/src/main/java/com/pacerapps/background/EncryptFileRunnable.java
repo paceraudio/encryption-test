@@ -1,23 +1,15 @@
 package com.pacerapps.background;
 
-import com.pacerapps.EncApp;
-import com.pacerapps.repository.EncryptionRepository;
 import com.pacerapps.repository.filesystem.FileSystemUtil;
-
-import javax.inject.Inject;
 
 /**
  * Created by jeffwconaway on 7/21/16.
  */
 public class EncryptFileRunnable implements Runnable {
-    String originalPath;
-    String encryptedDirectory;
-    String originalName;
-    EncryptionModel listener;
-
-    @Inject
-    EncryptionRepository repository;
-
+    private String originalPath;
+    private String encryptedDirectory;
+    private String originalName;
+    private EncryptionModel listener;
     public static final String TAG = "jwc";
 
     public EncryptFileRunnable(String originalPath, String originalName, String encryptedDirectory, EncryptionModel listener) {
@@ -25,7 +17,6 @@ public class EncryptFileRunnable implements Runnable {
         this.originalName = originalName;
         this.encryptedDirectory = encryptedDirectory;
         this.listener = listener;
-        EncApp.getInstance().getAppComponent().inject(this);
     }
 
     @Override

@@ -12,13 +12,13 @@ import javax.inject.Inject;
 
 public class EncryptionActivityPresenter {
 
-    EncryptionActivityView view;
+    private EncryptionActivityView view;
     @Inject
     EncryptionModelImpl model;
     @Inject
     Context context;
 
-    MusicPlayer musicPlayer;
+    private MusicPlayer musicPlayer;
 
 
     public EncryptionActivityPresenter(Context context, EncryptionModelImpl model) {
@@ -28,13 +28,12 @@ public class EncryptionActivityPresenter {
         musicPlayer = new MusicPlayer(context, model);
     }
 
-    public void setView(EncryptionActivityView view) {
+    void setView(EncryptionActivityView view) {
         this.view = view;
     }
 
     void makeDirectory() {
         model.makeDirectories();
-        //view.onDirCreated(exists);
     }
 
     String getSongDirectory() {
@@ -51,12 +50,10 @@ public class EncryptionActivityPresenter {
 
     void encryptFile() {
         model.encryptFile();
-        //view.onEncrypt();
     }
 
     void decryptFile() {
         model.decryptFile();
-        //view.onDecrypt();
     }
 
     void playOriginal() {
@@ -69,12 +66,6 @@ public class EncryptionActivityPresenter {
         musicPlayer.playDecryptedExo();
         view.onPlayDecrypted();
         onMusicPlaying(model.getDecryptedSongPath());
-    }
-
-    void stop() {
-        musicPlayer.stopExo();
-        view.onStopClicked();
-        view.onMusicStopped();
     }
 
     void playEncrypted() {
@@ -118,15 +109,15 @@ public class EncryptionActivityPresenter {
     }
 
 
-    public void onError(Exception e) {
+    void onError(Exception e) {
         view.onError(e);
     }
 
-    public void onFileWrittenFromRaw() {
+    void onFileWrittenFromRaw() {
         view.onFileWrittenFromRaw();
     }
 
-    public void onExoEnd() {
+    void onExoEnd() {
         view.onMusicStopped();
     }
 }

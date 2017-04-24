@@ -39,10 +39,10 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class MusicPlayer implements ExoPlayer.EventListener, TransferListener<DataSource> {
 
-    EncryptionModelImpl model;
-    Context context;
+    private EncryptionModelImpl model;
+    private Context context;
 
-    SimpleExoPlayer exoPlayer;
+    private SimpleExoPlayer exoPlayer;
 
     private static final String TAG = "jwc";
 
@@ -171,7 +171,6 @@ public class MusicPlayer implements ExoPlayer.EventListener, TransferListener<Da
     }
 
     public void playEncryptedExo() {
-        //prepareExo(model.getEncryptedSongPath());
         prepareExoDecryptWhilePlaying(model.getEncryptedSongPath());
     }
 

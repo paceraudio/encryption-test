@@ -19,15 +19,15 @@ import javax.crypto.CipherInputStream;
  * Created by jeffwconaway on 4/22/17.
  */
 
-public class EncryptedDataSource implements DataSource {
+class EncryptedDataSource implements DataSource {
 
     private long bytesRemaining;
     private boolean opened;
-    CipherInputStream cipherInputStream;
-    Cipher cipher;
-    TransferListener<? super EncryptedDataSource> transferListener;
+    private CipherInputStream cipherInputStream;
+    private Cipher cipher;
+    private TransferListener<? super EncryptedDataSource> transferListener;
 
-    public EncryptedDataSource(Cipher cipher, TransferListener<? super DataSource> transferListener) {
+    EncryptedDataSource(Cipher cipher, TransferListener<? super DataSource> transferListener) {
         this.cipher = cipher;
         this.transferListener = transferListener;
     }

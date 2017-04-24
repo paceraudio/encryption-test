@@ -21,7 +21,6 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     Button playEncryptedButton;
     Button playDeryptedButton;
     Button playDecryptedFromDbButton;
-    Button stopButton;
     TextView statusTextView;
     int pink;
 
@@ -61,7 +60,6 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         playDeryptedButton = (Button) findViewById(R.id.button_play_decrypt);
         playEncryptedButton = (Button) findViewById(R.id.button_play_encrypted);
         playDecryptedFromDbButton = (Button) findViewById(R.id.button_play_decrypted_from_db);
-        //stopButton = (Button) findViewById(R.id.button_stop);
         statusTextView = (TextView) findViewById(R.id.textview_status);
     }
 
@@ -74,7 +72,6 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
         playDeryptedButton.setOnClickListener(this);
         playEncryptedButton.setOnClickListener(this);
         playDecryptedFromDbButton.setOnClickListener(this);
-        //stopButton.setOnClickListener(this);
     }
 
     @Override
@@ -97,9 +94,7 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
             presenter.decryptFromDb();
         } else if (v == playDecryptedFromDbButton) {
             presenter.playDecryptedFromDb();
-        }/*else if (v == stopButton) {
-            presenter.stop();
-        }*/
+        }
     }
 
     private void showUser(final String message) {
@@ -114,11 +109,6 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-    }
-
-    @Override
-    public void setPresenter(EncryptionActivityPresenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -190,24 +180,6 @@ public class EncryptionActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onError(Exception e) {
         showUser(e.getClass().getSimpleName() + " occurred!");
-    }
-
-    @Override
-    public void onStopClicked() {
-        Log.d(TAG, "onStopClicked: running!");
-    }
-
-    @Override
-    public void onDirCreated(boolean exists) {
-        if (exists) {
-            showUser("Directories created!");
-        } else {
-            showUser("Problem creating directories!");
-        }
-
-        Log.d(TAG, "onDirCreated: " + presenter.getSongDirectory());
-        Log.d(TAG, "onDirCreated: " + presenter.getEncryptDirectory());
-        Log.d(TAG, "onDirCreated: " + presenter.getDecryptDirectory());
     }
 
     private void enableButton(final Button button) {

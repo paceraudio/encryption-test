@@ -125,7 +125,7 @@ public class CouchBaseLiteDbHelper {
                 int i;
                 while ((i = inputStream.read(bytes)) != -1) {
                     fileOutputStream.write(bytes, 0, i);
-                    Log.d(TAG, "encryptFile: " + i);
+                    //Log.d(TAG, "encryptFile: " + i);
                 }
                 fileOutputStream.flush();
                 fileOutputStream.close();

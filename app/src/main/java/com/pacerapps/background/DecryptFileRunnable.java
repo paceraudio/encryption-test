@@ -7,10 +7,10 @@ import com.pacerapps.repository.filesystem.FileSystemUtil;
  */
 public class DecryptFileRunnable implements Runnable {
 
-    String encryptedDir;
-    String decryptedDir;
-    String originalName;
-    EncryptionModel model;
+    private String encryptedDir;
+    private String decryptedDir;
+    private String originalName;
+    private EncryptionModel model;
 
     public static final String TAG = "jwc";
 

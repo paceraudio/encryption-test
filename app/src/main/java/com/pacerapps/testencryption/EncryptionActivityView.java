@@ -6,8 +6,6 @@ package com.pacerapps.testencryption;
 
 interface EncryptionActivityView {
 
-    void setPresenter(EncryptionActivityPresenter presenter);
-
     void onEncrypt();
 
     void onDecrypt();
@@ -15,10 +13,6 @@ interface EncryptionActivityView {
     void onPlayOriginal();
 
     void onPlayDecrypted();
-
-    void onStopClicked();
-
-    void onDirCreated(boolean exists);
 
     void onPlayEncrypted();
 

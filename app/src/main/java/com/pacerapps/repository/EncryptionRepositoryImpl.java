@@ -36,8 +36,7 @@ public class EncryptionRepositoryImpl implements EncryptionRepository {
     @Inject
     CouchBaseLiteDbHelper couchBaseLiteDbHelper;
 
-    //@Inject
-    EncryptionModelImpl model;
+    private EncryptionModelImpl model;
 
     public EncryptionRepositoryImpl(Context context, CouchBaseLiteDbHelper couchBaseLiteDbHelper) {
         this.context = context;
@@ -76,8 +75,8 @@ public class EncryptionRepositoryImpl implements EncryptionRepository {
 
     private void writeRawMp4ToFileSystem() {
         Log.d(TAG, "writeRawMp4ToFileSystem() called");
-        InputStream in = context.getResources().openRawResource(R.raw.sound);
-        String path = model.getSongDirectory() + "/sound.mp3";
+        InputStream in = context.getResources().openRawResource(R.raw.scale);
+        String path = model.getSongDirectory() + "/scale.mp3";
         File toWrite = new File(path);
         try {
             toWrite.createNewFile();
@@ -93,9 +92,6 @@ public class EncryptionRepositoryImpl implements EncryptionRepository {
             out.close();
             in.close();
             model.onFileWrittenFromRaw(toWrite);
-            //model.onSongResourceToFileSystem();
-            //model.setOriginalSongPath(path);
-
 
         } catch (IOException e) {
             Log.e(TAG, "writeRawMp4ToFileSystem: ", e);

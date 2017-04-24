@@ -9,13 +9,13 @@ import javax.crypto.Cipher;
  * Created by jeffwconaway on 4/23/17.
  */
 
-public class EncryptedDataSourceFactory implements DataSource.Factory {
+class EncryptedDataSourceFactory implements DataSource.Factory {
 
 
     private Cipher cipher;
     private TransferListener<? super DataSource> transferListener;
 
-    public EncryptedDataSourceFactory(Cipher cipher, TransferListener<? super DataSource> listener) {
+    EncryptedDataSourceFactory(Cipher cipher, TransferListener<? super DataSource> listener) {
         this.cipher = cipher;
         this.transferListener = listener;
     }
